@@ -17,6 +17,33 @@ Una pregunta incómoda aparece al automatizar una app con base de datos en la nu
 - **Repositorio público:** https://github.com/CRJL19/votaya
 - **Video:** `[enlace al video]`
 
+## La aplicación
+
+VotaYa permite crear una encuesta, compartir su enlace y ver los votos llegar sin recargar la página. La construimos con Node.js y Express en el servidor, y con HTML, CSS y JavaScript sin frameworks en el navegador.
+
+La actividad pedía evitar Redis, MongoDB, Neo4j y Prometheus, así que usamos Firestore, una base NoSQL de documentos. Cada encuesta es un documento que guarda sus opciones y contadores, y cada voto es un documento en una subcolección:
+
+```
+polls/{pollId}                   pregunta, opciones, contadores, estado
+polls/{pollId}/votes/{voterId}   opción elegida, fecha
+```
+
+El servidor se conecta con el Admin SDK de Firebase, y con ese SDK registrar un voto ocupa pocas líneas:
+
+```javascript
+const batch = db.batch();
+batch.create(ref.collection('votes').doc(voterId), { optionId, votedAt });
+batch.update(ref, { [`counts.${optionId}`]: FieldValue.increment(1) });
+await batch.commit();
+```
+
+Para probarla en tu máquina no necesitas cuenta de Google, porque corre contra el emulador:
+
+```bash
+npm ci
+npm run dev
+```
+
 ## El recorrido
 
 ```

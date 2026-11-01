@@ -112,6 +112,16 @@ El mismo razonamiento se aplicó al health check. Render lo consulta periódicam
 - Cerrar o borrar una encuesta exige un token que se entrega solo a quien la crea. En la base se guarda únicamente su hash.
 - Hay límite de peticiones por IP y cabeceras de seguridad con Helmet.
 
+## Despliegue automático en la nube
+
+La aplicación está publicada en **Render**, un proveedor público, con su base en **Firestore**, en Google Cloud. No la desplegamos a mano: cada `git push` a `main` ejecuta un workflow de **GitHub Actions** con tres pasos:
+
+1. Pruebas de integración contra el emulador oficial de Firestore.
+2. Construcción de la imagen Docker.
+3. Si ambos pasan, una llamada al Deploy Hook de Render, que publica la nueva versión.
+
+El despliegue automático propio de Render está desactivado (`autoDeploy: false` en `render.yaml`), de modo que el único camino a producción pasa por las pruebas. La credencial de Firestore se configura como variable de entorno en Render y nunca entra al repositorio.
+
 ## Limitaciones
 
 Prefiero dejarlas claras:
