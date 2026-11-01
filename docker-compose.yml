@@ -1,0 +1,28 @@
+# Entorno local: la app contra el emulador de Firestore, sin cuenta de Google.
+#
+#   docker compose up --build              -> http://localhost:3000
+#   docker compose run --rm emulator npm test
+services:
+  emulator:
+    build:
+      context: .
+      dockerfile: docker/emulator.Dockerfile
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8080/"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 15s
+
+  app:
+    build: .
+    environment:
+      FIRESTORE_EMULATOR_HOST: emulator:8080
+      GCLOUD_PROJECT: demo-votaya
+      NODE_ENV: development
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      emulator:
+        condition: service_healthy

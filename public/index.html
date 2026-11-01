@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VotaYa · Encuestas en vivo</title>
+  <meta name="description" content="Crea una encuesta, comparte el enlace y mira los votos llegar en vivo." />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#/">VotaYa</a>
+    <span class="tagline">Encuestas en vivo sobre Firestore</span>
+  </header>
+
+  <main id="view" class="container" aria-live="polite"></main>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <template id="home-view">
+    <section class="card">
+      <h1>Crea una encuesta</h1>
+      <form id="poll-form">
+        <label for="question">Pregunta</label>
+        <input id="question" maxlength="200" required placeholder="¿Qué lenguaje usamos en el próximo proyecto?" />
+
+        <fieldset>
+          <legend>Opciones</legend>
+          <div id="options"></div>
+          <button type="button" id="add-option" class="link">Agregar opción</button>
+        </fieldset>
+
+        <button type="submit" class="primary" id="create-btn">Crear encuesta</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Encuestas recientes</h2>
+      <ul id="poll-list" class="poll-list"><li class="muted">Cargando…</li></ul>
+    </section>
+  </template>
+
+  <template id="poll-view">
+    <p><a href="#/">Volver</a></p>
+    <section class="card">
+      <div class="poll-head">
+        <h1 id="poll-question"></h1>
+        <span id="live" class="live" hidden>En vivo</span>
+      </div>
+      <p id="poll-summary" class="muted"></p>
+      <ul id="poll-options" class="results"></ul>
+      <div class="actions">
+        <button type="button" id="share" class="secondary">Copiar enlace</button>
+      </div>
+      <div id="admin" class="actions admin" hidden>
+        <button type="button" id="close-poll" class="secondary">Cerrar votación</button>
+        <button type="button" id="delete-poll" class="danger">Eliminar encuesta</button>
+      </div>
+    </section>
+  </template>
+
+  <noscript>Esta aplicación necesita JavaScript.</noscript>
+</body>
+</html>

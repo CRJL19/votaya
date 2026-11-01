@@ -1,0 +1,16 @@
+# Infraestructura como código de Render (Blueprint).
+services:
+  - type: web
+    name: votaya-firestore
+    runtime: docker
+    plan: free
+    branch: main
+    # El despliegue lo dispara GitHub Actions, y solo si pasan las pruebas.
+    autoDeploy: false
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # sync: false -> Render la pide al crear el servicio y nunca vive en el repositorio.
+      - key: FIREBASE_SERVICE_ACCOUNT
+        sync: false
