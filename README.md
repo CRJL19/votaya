@@ -13,7 +13,7 @@ Proyecto de la **Actividad Grupal 01-U2: NoSQL App Development**, Base de Datos 
 |---|---|
 | Aplicación | <https://votaya-firestore.onrender.com> |
 | Repositorio | <https://github.com/CRJL19/votaya> |
-| Video | `[PENDIENTE]` |
+| Video | <https://youtu.be/isFjASR8LGw> |
 | Artículo Carlos | `[PENDIENTE]` |
 | Artículo Arturo | `[PENDIENTE]` |
 
