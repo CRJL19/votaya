@@ -14,7 +14,7 @@ Proyecto de la **Actividad Grupal 01-U2: NoSQL App Development**, Base de Datos 
 | Aplicación | <https://votaya-firestore.onrender.com> |
 | Repositorio | <https://github.com/CRJL19/votaya> |
 | Video | <https://youtu.be/isFjASR8LGw> |
-| Artículo Carlos | `[PENDIENTE]` |
+| Artículo Carlos | <https://dev.to/crjl11/modelar-para-nosql-como-construimos-encuestas-en-vivo-con-firestore-y-por-que-una-transaccion-nos-5gef> |
 | Artículo Arturo | `[PENDIENTE]` |
 
 ## Stack
